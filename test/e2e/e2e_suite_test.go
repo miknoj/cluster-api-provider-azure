@@ -16,32 +16,32 @@ limitations under the License.
 
 package e2e_test
 
-// import (
-// 	"bytes"
+import (
+	"bytes"
 // 	"context"
-// 	"flag"
-// 	"fmt"
-// 	"io/ioutil"
-// 	"testing"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"testing"
 // 	"time"
 
-// 	. "github.com/onsi/ginkgo"
-// 	. "github.com/onsi/gomega"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 
 // 	appsv1 "k8s.io/api/apps/v1"
 // 	apimachinerytypes "k8s.io/apimachinery/pkg/types"
 // 	"sigs.k8s.io/cluster-api-provider-azure/test/e2e/util/kind"
 // 	"sigs.k8s.io/cluster-api/pkg/util"
 // 	crclient "sigs.k8s.io/controller-runtime/pkg/client"
-// )
+)
 
-// func TestE2e(t *testing.T) {
-// 	if err := initLocation(); err != nil {
-// 		t.Fatal(err)
-// 	}
-// 	RegisterFailHandler(Fail)
-// 	RunSpecs(t, "e2e Suite")
-// }
+func TestE2e(t *testing.T) {
+	if err := initLocation(); err != nil {
+		t.Fatal(err)
+	}
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "e2e Suite")
+}
 
 // const (
 // 	setupTimeout          = 10 * 60
@@ -49,19 +49,19 @@ package e2e_test
 // 	capzStatefulSetName   = "azure-provider-controller-manager"
 // )
 
-// var (
-// 	// TODO: Do we want to do file-based auth? Not suggested. If we determine no, remove this deadcode
-// 	//credFile               = flag.String("credFile", "", "path to an Azure credentials file")
-// 	locationFile           = flag.String("locationFile", "", "The path to a text file containing the Azure location")
-// 	providerComponentsYAML = flag.String("providerComponentsYAML", "", "path to the provider components YAML for the cluster API")
-// 	managerImageTar        = flag.String("managerImageTar", "", "a script to load the manager Docker image into Docker")
+var (
+	// TODO: Do we want to do file-based auth? Not suggested. If we determine no, remove this deadcode
+	//credFile               = flag.String("credFile", "", "path to an Azure credentials file")
+	locationFile           = flag.String("locationFile", "", "The path to a text file containing the Azure location")
+	// providerComponentsYAML = flag.String("providerComponentsYAML", "", "path to the provider components YAML for the cluster API")
+	// managerImageTar        = flag.String("managerImageTar", "", "a script to load the manager Docker image into Docker")
 
-// 	kindCluster kind.Cluster
-// 	kindClient  crclient.Client
-// 	location    string
-// )
+	// kindCluster kind.Cluster
+	// kindClient  crclient.Client
+	location    string
+)
 
-// var _ = BeforeSuite(func() {
+var _ = BeforeSuite(func() {
 // 	fmt.Fprintf(GinkgoWriter, "Setting up kind cluster\n")
 // 	kindCluster = kind.Cluster{
 // 		Name: "capz-test-" + util.RandomString(6),
@@ -96,22 +96,22 @@ package e2e_test
 // var _ = AfterSuite(func() {
 // 	fmt.Fprintf(GinkgoWriter, "Tearing down kind cluster\n")
 // 	kindCluster.Teardown()
-// })
+})
 
-// // TODO: Determine if we need this
-// func initLocation() error {
-// 	if locationFile != nil && *locationFile != "" {
-// 		data, err := ioutil.ReadFile(*locationFile)
-// 		if err != nil {
-// 			return fmt.Errorf("error reading Azure location file: %v", err)
-// 		}
-// 		location = string(bytes.TrimSpace(data))
-// 		return nil
-// 	}
+// TODO: Determine if we need this
+func initLocation() error {
+	if locationFile != nil && *locationFile != "" {
+		data, err := ioutil.ReadFile(*locationFile)
+		if err != nil {
+			return fmt.Errorf("error reading Azure location file: %v", err)
+		}
+		location = string(bytes.TrimSpace(data))
+		return nil
+	}
 
-// 	location = "eastus"
-// 	return nil
-// }
+	location = "eastus"
+	return nil
+}
 
 // // TODO: Add function to handle auth to Azure
 
